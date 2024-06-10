@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gameps/core/themes/app_colors.dart';
+import 'package:gameps/presentation/game_detail/view/game_detail_view.dart';
 import 'package:gameps/presentation/game_list/controller/game_list_controller.dart';
 import 'package:get/get.dart';
 
@@ -55,7 +56,10 @@ class GameListView extends GetView<GameListController> {
                   itemBuilder: (context, index) {
                     return GameListItem(
                       onTap: () {
-                        // TODO go to detail page
+                        Get.toNamed(
+                          GameDetailView.routeName,
+                          arguments: controller.games.elementAt(index),
+                        );
                       },
                       game: controller.games.elementAt(index),
                     );
