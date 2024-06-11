@@ -58,7 +58,7 @@ class GameListView extends GetView<GameListController> {
                       onTap: () {
                         Get.toNamed(
                           GameDetailView.routeName,
-                          arguments: controller.games.elementAt(index),
+                          arguments: controller.games.elementAt(index).id,
                         );
                       },
                       game: controller.games.elementAt(index),

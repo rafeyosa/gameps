@@ -76,7 +76,9 @@ class GameListItem extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      game.tba.orFalse ? 'TBA' : 'Released: ${game.released.orEmpty}',
+                      game.tba.orFalse
+                          ? 'TBA'
+                          : 'Released: ${game.released.orEmpty}',
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         color: AppColors.textGray,
@@ -96,6 +98,8 @@ class GameListItem extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 8),
+                    ],
+                    if (game.rating != null) ...[
                       Row(
                         children: [
                           RatingIcon(

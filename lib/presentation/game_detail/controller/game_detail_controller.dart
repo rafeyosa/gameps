@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:gameps/data/models/game_model.dart';
+import 'package:gameps/data/models/game_detail_model.dart';
+import 'package:gameps/data/repositories/game_repository.dart';
 import 'package:get/get.dart';
 
 class GameDetailController extends GetxController {
+  GameDetailController({required this.gameRepository});
+
+  final GameRepository gameRepository;
   final kExpandedHeight = 250.0;
 
   double get horizontalTitlePadding {
@@ -41,8 +45,8 @@ class GameDetailController extends GetxController {
   }
 
   late ScrollController scrollController;
-  GameModel? game;
-  bool isShowMore = false;
+  GameDetailModel? game;
+  bool isLoading = true;
 
   @override
   void onInit() {
@@ -55,13 +59,21 @@ class GameDetailController extends GetxController {
 
   @override
   void onReady() async {
-    game = Get.arguments as GameModel?;
-    update();
+    var id = Get.arguments as int?;
+    if (id == null) {
+      Get.back();
+    }
+    getData(id.toString());
     super.onReady();
   }
 
-  void onShowMore() {
-    isShowMore = !isShowMore;
+  Future<void> getData(String id) async {
+    isLoading = true;
+    update;
+
+    game = await gameRepository.getGameDetail(id);
+
+    isLoading = false;
     update();
   }
 }

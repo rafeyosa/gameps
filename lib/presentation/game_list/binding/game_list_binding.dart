@@ -6,7 +6,7 @@ class GameListBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<GameListController>(
-      () => GameListController(),
+      () => GameListController(gameRepository: Get.find()),
     );
   }
 }

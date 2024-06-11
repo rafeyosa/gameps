@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:gameps/core/extensions/string_extension.dart';
 import 'package:gameps/core/themes/app_colors.dart';
+import 'package:gameps/data/models/developer_model.dart';
 import 'package:gameps/presentation/game_list/view/widgets/rating_icon.dart';
 import 'package:get/get.dart';
 
@@ -13,9 +15,16 @@ class GameDetailView extends GetView<GameDetailController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GameDetailController>(builder: (controller) {
-      return Scaffold(
-        body: NestedScrollView(
+    return Scaffold(
+      body: GetBuilder<GameDetailController>(builder: (controller) {
+        if (controller.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: AppColors.primary,
+            ),
+          );
+        }
+        return NestedScrollView(
           controller: controller.scrollController,
           headerSliverBuilder: (context, isScrolled) {
             return [
@@ -34,7 +43,7 @@ class GameDetailView extends GetView<GameDetailController> {
                       controller.titleLerp,
                     ),
                   ),
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () => Get.back(),
                 ),
                 backgroundColor: AppColors.surface,
                 shadowColor: Colors.black87,
@@ -88,6 +97,7 @@ class GameDetailView extends GetView<GameDetailController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           child: Column(
@@ -141,12 +151,13 @@ class GameDetailView extends GetView<GameDetailController> {
                     ),
                     const SizedBox(height: 16),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Expanded(
+                        Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 'Developer',
                                 style: TextStyle(
                                   color: AppColors.textGray,
@@ -155,8 +166,11 @@ class GameDetailView extends GetView<GameDetailController> {
                                 ),
                               ),
                               Text(
-                                '-',
-                                style: TextStyle(
+                                controller.game?.developers != null
+                                    ? getConcatenatedNames(
+                                        controller.game!.developers!)
+                                    : '-',
+                                style: const TextStyle(
                                   color: AppColors.textBlack,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16,
@@ -165,31 +179,32 @@ class GameDetailView extends GetView<GameDetailController> {
                             ],
                           ),
                         ),
-                        if (controller.game?.metacritic != null) ...[
-                          const Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Publisher',
-                                  style: TextStyle(
-                                    color: AppColors.textGray,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
-                                  ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Publisher',
+                                style: TextStyle(
+                                  color: AppColors.textGray,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
                                 ),
-                                Text(
-                                  '-',
-                                  style: TextStyle(
-                                    color: AppColors.textBlack,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                  ),
+                              ),
+                              Text(
+                                controller.game?.publishers != null
+                                    ? getConcatenatedNames(
+                                        controller.game!.publishers!)
+                                    : '-',
+                                style: const TextStyle(
+                                  color: AppColors.textBlack,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ],
                     ),
                     const SizedBox(height: 16),
@@ -204,7 +219,7 @@ class GameDetailView extends GetView<GameDetailController> {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          '${controller.game?.rating}',
+                          '${controller.game?.rating ?? ''}',
                           textAlign: TextAlign.justify,
                           style: const TextStyle(
                             fontWeight: FontWeight.w400,
@@ -222,31 +237,14 @@ class GameDetailView extends GetView<GameDetailController> {
                         fontSize: 16,
                       ),
                     ),
-                    Text(
-                      'Vivamus vel tincidunt eros, vitae lobortis lorem. Sed tortor mi, accumsan id ex at, sodales varius felis. Vivamus laoreet nibh vitae augue sollicitudin venenatis. Maecenas malesuada pretium congue. Nulla ultricies imperdiet mauris rutrum tincidunt. Sed consectetur tellus sed urna dignissim, vel tincidunt risus pellentesque. Fusce ornare a ligula ac egestas. Donec vitae ultrices nibh. Morbi non lacinia sapien. In vitae lorem iaculis, lacinia nisl molestie, dictum sapien.',
-                      maxLines: controller.isShowMore ? null : 7,
-                      overflow:
-                          controller.isShowMore ? null : TextOverflow.ellipsis,
-                      textAlign: TextAlign.justify,
-                      style: const TextStyle(
-                        color: AppColors.textBlack,
-                        fontWeight: FontWeight.w400,
+                    HtmlWidget(
+                      controller.game?.description ?? '-',
+                      textStyle: const TextStyle(
                         fontSize: 16,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    GestureDetector(
-                      onTap: controller.onShowMore,
-                      child: Text(
-                        controller.isShowMore
-                            ? 'Lihat lebih sedikit'
-                            : 'Lihat lebih banyak',
-                        style: const TextStyle(
-                          overflow: TextOverflow.ellipsis,
-                          color: AppColors.secondary,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 14,
-                        ),
+                        letterSpacing: 1.5,
+                        wordSpacing: 1,
+                        color: AppColors.textBlack,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -284,8 +282,22 @@ class GameDetailView extends GetView<GameDetailController> {
               ),
             ],
           ),
-        ),
-      );
-    });
+        );
+      }),
+    );
+  }
+
+  String getConcatenatedNames(List<DeveloperModel> list) {
+    List<String> names = [];
+    for (var element in list) {
+      if (!element.name.isNullOrEmpty) {
+        names.add(element.name!);
+      }
+    }
+    var newName = names.join(', ');
+    if (newName.isEmpty) {
+      return '-';
+    }
+    return newName;
   }
 }
