@@ -69,5 +69,6 @@ This will generate a `coverage` directory with the test coverage report. To view
 genhtml coverage/lcov.info -o coverage/html
 ``` 
 Then open `coverage/html/index.html` in your web browser to view the coverage report.
-<img width="1728" alt="Screenshot 2024-06-12 at 18 53 32" src="https://github.com/rafeyosa/gameps/assets/67069286/06432db8-ffda-4eed-a198-c698e2fb7ad3">
+<img width="1728" alt="Screenshot 2024-06-12 at 19 18 20" src="https://github.com/rafeyosa/gameps/assets/67069286/e6fdc316-7349-4a40-9454-57c6285f8c18">
+
 
