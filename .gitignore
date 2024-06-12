@@ -62,3 +62,7 @@ android/.gradle
 **/*.inject.dart
 **/*.g.dart
 lib/generated
+
+# Unit testing related
+coverage
+*.mocks.dart
