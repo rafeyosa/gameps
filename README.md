@@ -21,7 +21,7 @@ This project  was assignment to build a mobile application to browse the latest 
 
 ## :wrench: Development
 
-Below you can find about development environment, file structure, build, and deployment
+Below you can find about development environment and build
 
 ### :nut_and_bolt: Environment
 
