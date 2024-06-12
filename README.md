@@ -13,7 +13,7 @@ To get started with this project, ensure you have the following prerequisites:
 - [Development](#wrench-development)
   - [Development Environment](#nut_and_bolt-environment)
   - [Build](#hammer-build)
-  - [Run Testing](#mag_right-run-testing)
+- [Run Testing](#mag_right-run-testing)
 
 ## :beginner: About
 
@@ -71,3 +71,5 @@ This will generate a `coverage` directory with the test coverage report. To view
 genhtml coverage/lcov.info -o coverage/html
 ``` 
 Then open `coverage/html/index.html` in your web browser to view the coverage report.
+<img width="1728" alt="Screenshot 2024-06-12 at 18 53 32" src="https://github.com/rafeyosa/gameps/assets/67069286/06432db8-ffda-4eed-a198-c698e2fb7ad3">
+
