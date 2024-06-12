@@ -7,6 +7,7 @@ import 'package:gameps/presentation/game_list/view/widgets/rating_icon.dart';
 import 'package:get/get.dart';
 
 import '../controller/game_detail_controller.dart';
+import 'widgets/genre_list_item.dart';
 
 class GameDetailView extends GetView<GameDetailController> {
   const GameDetailView({super.key});
@@ -255,22 +256,9 @@ class GameDetailView extends GetView<GameDetailController> {
                         scrollDirection: Axis.horizontal,
                         itemCount: controller.game?.genres?.length ?? 0,
                         itemBuilder: (context, index) {
-                          return Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(color: Colors.black45),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Text(
-                              (controller.game?.genres![index].name).orEmpty,
-                              style: const TextStyle(
-                                color: AppColors.textBlack,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                              ),
-                            ),
-                          );
+                          return GenreListItem(
+                              name: (controller.game?.genres![index].name)
+                                  .orEmpty);
                         },
                         separatorBuilder: (context, index) =>
                             const SizedBox(width: 4),
