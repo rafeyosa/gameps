@@ -29,10 +29,17 @@ class GameListController extends GetxController {
     super.onReady();
   }
 
-  Future<void> getData() async {
+  void getData() async {
     isLoading = true;
     update();
 
+    await getGameList();
+
+    isLoading = false;
+    update();
+  }
+
+  Future<void> getGameList() async {
     DateTime currentDateTime = DateTime.now();
     String endDate = DateFormat('yyyy-MM-dd').format(currentDateTime);
 
@@ -47,8 +54,6 @@ class GameListController extends GetxController {
       endDate: endDate,
     );
     games.addAll(res);
-
-    isLoading = false;
     update();
   }
 
@@ -58,7 +63,7 @@ class GameListController extends GetxController {
       isLoadingLoadMore = true;
       update();
 
-      await getData();
+      await getGameList();
 
       isLoadingLoadMore = false;
       update();
