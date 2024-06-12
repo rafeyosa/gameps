@@ -37,19 +37,19 @@ When building apk, aab, or ipa we use the build.sh script
 To build APK file :
 
 ```  
-flutter build apk --dart-define API_KEY=02ef6ba5d13444ee86bad607e8bce3f4 --dart-define API_URL=api.rawg.io 
+flutter build apk --dart-define API_KEY=<your key> --dart-define API_URL=api.rawg.io 
 ```  
 
 To build AAB file :
 
 ```   
-flutter build appbundle --dart-define API_KEY=02ef6ba5d13444ee86bad607e8bce3f4 --dart-define API_URL=api.rawg.io  
+flutter build appbundle --dart-define API_KEY=<your key> --dart-define API_URL=api.rawg.io  
 ```  
 
 To build IPA file :
 
 ```  
-flutter build ipa --dart-define API_KEY=02ef6ba5d13444ee86bad607e8bce3f4 --dart-define API_URL=api.rawg.io
+flutter build ipa --dart-define API_KEY=<your key> --dart-define API_URL=api.rawg.io
 ```    
 
 ## :mag_right: Run Testing
