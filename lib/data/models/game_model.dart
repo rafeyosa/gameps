@@ -1,19 +1,21 @@
+import 'package:equatable/equatable.dart';
+
 import 'esrb_rating_model.dart';
 import 'genre_model.dart';
 
-class GameModel {
-  String? name;
-  String? released;
-  bool? tba;
-  String? backgroundImage;
-  double? rating;
-  int? metacritic;
-  String? updated;
-  int? id;
-  EsrbRatingModel? esrbRating;
-  List<GenreModel>? genres;
+class GameModel extends Equatable {
+  final String? name;
+  final String? released;
+  final bool? tba;
+  final String? backgroundImage;
+  final double? rating;
+  final int? metacritic;
+  final String? updated;
+  final int? id;
+  final EsrbRatingModel? esrbRating;
+  final List<GenreModel>? genres;
 
-  GameModel({
+  const GameModel({
     this.name,
     this.released,
     this.tba,
@@ -39,7 +41,7 @@ class GameModel {
             ? null
             : EsrbRatingModel.fromJson(json["esrb_rating"]),
         genres: json["genres"] == null
-            ? []
+            ? null
             : List<GenreModel>.from(
                 json["genres"]!.map((x) => GenreModel.fromJson(x))),
       );
@@ -55,7 +57,21 @@ class GameModel {
         "id": id,
         "esrb_rating": esrbRating?.toJson(),
         "genres": genres == null
-            ? []
+            ? null
             : List<dynamic>.from(genres!.map((x) => x.toJson())),
       };
+
+  @override
+  List<Object?> get props => [
+        name,
+        released,
+        tba,
+        backgroundImage,
+        rating,
+        metacritic,
+        updated,
+        id,
+        esrbRating,
+        genres,
+      ];
 }

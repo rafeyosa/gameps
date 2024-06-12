@@ -1,9 +1,11 @@
-class EsrbRatingModel {
-  int? id;
-  String? name;
-  String? slug;
+import 'package:equatable/equatable.dart';
 
-  EsrbRatingModel({
+class EsrbRatingModel extends Equatable {
+  final int? id;
+  final String? name;
+  final String? slug;
+
+  const EsrbRatingModel({
     this.id,
     this.name,
     this.slug,
@@ -21,4 +23,11 @@ class EsrbRatingModel {
         "name": name,
         "slug": slug,
       };
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        slug,
+      ];
 }

@@ -1,9 +1,11 @@
-class GenreModel {
-  int? id;
-  String? name;
-  String? slug;
+import 'package:equatable/equatable.dart';
 
-  GenreModel({
+class GenreModel extends Equatable {
+  final int? id;
+  final String? name;
+  final String? slug;
+
+  const GenreModel({
     this.id,
     this.name,
     this.slug,
@@ -20,4 +22,11 @@ class GenreModel {
         "name": name,
         "slug": slug,
       };
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        slug,
+      ];
 }
