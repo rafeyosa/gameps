@@ -26,7 +26,7 @@ Below you can find about development environment, file structure, build, and dep
 ### :nut_and_bolt: Environment
 
 ```  
-API_KEY= <your key>
+API_KEY=<your key>
 API_URL=api.rawg.io  
 ```  
 
