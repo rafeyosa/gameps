@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gameps/data/models/game_model.dart';
 
-import 'package:gameps/main.dart';
 import 'package:gameps/presentation/game_list/view/widgets/game_list_item.dart';
 
 void main() {
