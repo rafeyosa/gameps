@@ -32,8 +32,6 @@ API_URL=api.rawg.io
 
 ### :hammer: Build
 
-When building apk, aab, or ipa we use the build.sh script
-
 To build APK file :
 
 ```  
